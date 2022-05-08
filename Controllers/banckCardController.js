@@ -5,7 +5,9 @@ const catchAsync = require('../Utils/catchAsync');
 
 exports.save = catchAsync(async (req, res, next) => {
   try{
-    const new_cart = await BCart.create(req.body)
+    const data = req.body
+    data.user_id = req.user._id
+    const new_cart = await BCart.create(data)
     res.status(200).json({
       status: 'success',
       data: {
@@ -13,7 +15,12 @@ exports.save = catchAsync(async (req, res, next) => {
       }
     });
   }catch (e){
-
+    res.status(400).json({
+      status: 'error',
+      data: {
+        user: e.message
+      }
+    });
   }
 });
 
