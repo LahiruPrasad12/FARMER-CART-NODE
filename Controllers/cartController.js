@@ -36,7 +36,7 @@ exports.addToCart = async (req, res) => {
   }
 };
 
-// get cart od the logged in user
+// get cart od the logged-in user
 exports.getCart = async (req, res) => {
   try {
     const cart = await Cart.findOne({ user_id: req.user._id });
@@ -72,7 +72,7 @@ exports.storeToCart = async (req, res) => {
     )
       validatedCart = await OrderValidator.ValidateOrderProducts(req, res);
     else {
-      // no cart products means that user have deleted all the products from the cart
+      // no cart products means that user has deleted all the products from the cart
       // we can allow it because the cart can be empty
       validatedCart.products = [];
       validatedCart.payment_value = 0;
@@ -80,7 +80,7 @@ exports.storeToCart = async (req, res) => {
     // get cart details
     let cart = await Cart.findOne({ user_id: req.user._id });
     if (!cart) {
-      // ifthe user does not habve a cart
+      // if-the user does not have a cart
       cart = new Cart({
         user_id: req.user._id,
         products: validatedCart.products,
