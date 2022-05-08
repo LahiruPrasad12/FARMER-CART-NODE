@@ -12,6 +12,7 @@ const authRouter = require('./Routes/authRoutes');
 const adminRoute = require('./Routes/adminRoutes');
 const productRoutes = require('./Routes/productRoutes');
 const cartRoutes = require('./Routes/cartRoutes');
+const bankCartRoute = require('./Routes/bankCartRoute');
 const cors = require("cors");
 
 const app = express();
@@ -70,7 +71,7 @@ app.use('/', authRouter);
 app.use('/api/admins', adminRoute);
 app.use('/api/products', productRoutes);
 app.use('/api/carts', cartRoutes);
-
+app.use('/api/bank-carts', bankCartRoute);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
