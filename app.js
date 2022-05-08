@@ -10,6 +10,7 @@ const AppError = require('./Utils/appError');
 
 const authRouter = require('./Routes/authRoutes');
 const adminRoute = require('./Routes/adminRoutes');
+const productRoutes = require('./Routes/productRoutes');
 const cors = require("cors");
 
 const app = express();
@@ -66,6 +67,7 @@ app.use(express.static(`${__dirname}/public`));
 // app.use('/api/v1/tours', tourRouter);
 app.use('/', authRouter);
 app.use('/api/admins', adminRoute);
+app.use('/api/products', productRoutes);
 
 
 app.all('*', (req, res, next) => {
