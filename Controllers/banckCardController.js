@@ -17,11 +17,11 @@ exports.save = catchAsync(async (req, res, next) => {
 
 exports.removeCart = catchAsync(async (req, res, next) => {
   try{
-    const new_cart = await BCart.create(req.body)
+    await BCart.findByIdAndDelete(req.params.id)
     res.status(200).json({
       status: 'success',
       data: {
-        user: new_cart
+        message: "cart remove successfully"
       }
     });
   }catch (e){
