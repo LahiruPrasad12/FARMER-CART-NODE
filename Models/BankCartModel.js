@@ -1,6 +1,6 @@
 const { model, Schema } = require("mongoose");
 
-const cardSchema = new Schema(
+const bankCartSchema = new Schema(
   {
     card_no: { type: Number, required: [true, "Please enter a cart no"], },
     user_id: { type: Number, required: true },
@@ -11,4 +11,4 @@ const cardSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = model("card", cardSchema);
+module.exports = model("Bank_Cart", bankCartSchema);
