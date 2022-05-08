@@ -11,6 +11,7 @@ const AppError = require('./Utils/appError');
 const authRouter = require('./Routes/authRoutes');
 const adminRoute = require('./Routes/adminRoutes');
 const productRoutes = require('./Routes/productRoutes');
+const cartRoutes = require('./Routes/cartRoutes');
 const cors = require("cors");
 
 const app = express();
@@ -68,6 +69,7 @@ app.use(express.static(`${__dirname}/public`));
 app.use('/', authRouter);
 app.use('/api/admins', adminRoute);
 app.use('/api/products', productRoutes);
+app.use('/api/carts', cartRoutes);
 
 
 app.all('*', (req, res, next) => {

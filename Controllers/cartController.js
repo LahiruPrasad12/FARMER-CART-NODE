@@ -7,7 +7,7 @@ exports.addToCart = async (req, res) => {
     // validate the products in the cart
     //use the validator used to validate order products
     const validatedOrder = await OrderValidator.ValidateOrderProducts(req, res);
-
+    console.log(validatedOrder)
     let cart = await Cart.findOne({ user_id: req.user._id });
 
     if (!cart) {
@@ -20,8 +20,7 @@ exports.addToCart = async (req, res) => {
     } else {
       // if the user already have a cart
       cart.products = [...cart.products, ...validatedOrder.products];
-      cart.payment_value =
-        validatedOrder.payment_value + validatedOrder.payment_value;
+      cart.payment_value = cart.payment_value + validatedOrder.payment_value;
     }
     const result = await cart.save();
 
