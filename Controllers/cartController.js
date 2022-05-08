@@ -2,39 +2,39 @@ const Cart = require("../Models/Cart");
 const Product = require("../Models/productModel");
 const OrderValidator = require("../validators/orederValidator");
 
-exports.addToCart = async (req, res) => {
-  try {
-    // validate the products in the cart
-    //use the validator used to validate order products
-    const validatedOrder = await OrderValidator.ValidateOrderProducts(req, res);
-    console.log(validatedOrder)
-    let cart = await Cart.findOne({ user_id: req.user._id });
-
-    if (!cart) {
-      // if-the user does not have a cart
-      cart = new Cart({
-        user_id: req.user._id,
-        products: validatedOrder.products,
-        payment_value: validatedOrder.payment_value,
-      });
-    } else {
-      // if the user already have a cart
-      cart.products = [...cart.products, ...validatedOrder.products];
-      cart.payment_value = cart.payment_value + validatedOrder.payment_value;
-    }
-    const result = await cart.save();
-
-    // if cart save fail
-    if (result && result.error) return res.status(400).json(result);
-
-    return res
-      .status(200)
-      .json({ message: "All changes was saved", cart: result._doc });
-  } catch (error) {
-    console.error(error);
-    return res.status(400).json({ message: "Unexpected error" });
-  }
-};
+// exports.addToCart = async (req, res) => {
+//   try {
+//     // validate the products in the cart
+//     //use the validator used to validate order products
+//     const validatedOrder = await OrderValidator.ValidateOrderProducts(req, res);
+//     console.log(validatedOrder)
+//     let cart = await Cart.findOne({ user_id: req.user._id });
+//
+//     if (!cart) {
+//       // if-the user does not have a cart
+//       cart = new Cart({
+//         user_id: req.user._id,
+//         products: validatedOrder.products,
+//         payment_value: validatedOrder.payment_value,
+//       });
+//     } else {
+//       // if the user already have a cart
+//       cart.products = [...cart.products, ...validatedOrder.products];
+//       cart.payment_value = cart.payment_value + validatedOrder.payment_value;
+//     }
+//     const result = await cart.save();
+//
+//     // if cart save fail
+//     if (result && result.error) return res.status(400).json(result);
+//
+//     return res
+//       .status(200)
+//       .json({ message: "All changes was saved", cart: result._doc });
+//   } catch (error) {
+//     console.error(error);
+//     return res.status(400).json({ message: "Unexpected error" });
+//   }
+// };
 
 // get cart od the logged-in user
 exports.getCart = async (req, res) => {

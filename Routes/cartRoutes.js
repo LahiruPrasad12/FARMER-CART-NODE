@@ -6,7 +6,7 @@ const router = express.Router();
 //This api-resource route for update and delete specific student
 router.route('/')
   .get(authController.protect,  cartController.getCart)
-  .post(authController.protect, cartController.addToCart)
+  // .post(authController.protect, cartController.addToCart)
   .patch(authController.protect,cartController.storeToCart);
 
 // //This api-resource route for update and delete specific student
